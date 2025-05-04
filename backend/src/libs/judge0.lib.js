@@ -21,6 +21,8 @@ export const submitBatch = async (submissions) => {
 	return data;
 };
 
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve.ms));
+
 export const pollBatchResults = async (tokens) => {
 	while (true) {
 		const { data } = await axios.get(
@@ -29,21 +31,20 @@ export const pollBatchResults = async (tokens) => {
 				params: {
 					tokens: tokens.join(","),
 					base64_encoded: false,
-				},  
+				},
 			}
 		);
 
-    const results = data.submissions;
+		const results = data.submissions;
 
-    const isAllDone = results.every(
-      (r) => r.status.id !== 1 && r.status.id !== 2
-    )
+		const isAllDone = results.every(
+			(r) => r.status.id !== 1 && r.status.id !== 2
+		);
 
-    if(isAllDone) {
-      return results
-    }
+		if (isAllDone) {
+			return results;
+		}
 
-    await sleep(1000)
-    
+		await sleep(1000);
 	}
 };

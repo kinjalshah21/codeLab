@@ -19,16 +19,16 @@ export const createProblem = async (req, res) => {
 		codeSnippets,
 		referenceSolution,
 	} = req.body;
-	// check user role once again
 
+	// check user role once again
 	if (req.user.role !== UserRole.ADMIN) {
 		return res.status(403).json({
 			success: true,
 			message: "You are not allowed to create problem.",
 		});
 	}
-	// loop through each reference solution for different language.
 
+	// loop through each reference solution for different language.
 	try {
 		for (const [language, solutionCode] of Object.entries(
 			referenceSolution
@@ -85,7 +85,13 @@ export const createProblem = async (req, res) => {
 
       return res.status(201).json(newProblem);
 		}
-	} catch (error) {}
+	} catch (error) {
+      console.error('Error creating the problem.');
+      res.status(500).json({
+        success:false,
+        message: "Error occurred while creating the problem."
+      })
+  }
 };
 
 export const getAllProblems = async (req, res) => {};
