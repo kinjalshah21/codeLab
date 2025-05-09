@@ -74,16 +74,18 @@ export const createProblem = async (req, res) => {
 		//save the problem to the database
 
 		const newProblem = await db.problem.create({
-			title,
-			description,
-			difficulty,
-			tags,
-			examples,
-			constraints,
-			testcases,
-			codeSnippets,
-			referenceSolution,
-			userId: req.user.id,
+			data: {
+				title,
+				description,
+				difficulty,
+				tags,
+				examples,
+				constraints,
+				testcases,
+				codeSnippets,
+				referenceSolution,
+				userId: req.user.id,
+			},
 		});
 
 		return res.status(201).json({
@@ -91,19 +93,17 @@ export const createProblem = async (req, res) => {
 			message: "Problem created successfully",
 			problem: newProblem,
 		});
-    
 	} catch (error) {
 		console.error("Error creating the problem.");
 		res.status(500).json({
 			success: false,
 			message: "Error occurred while creating the problem.",
+			error: error.message
 		});
 	}
 };
 
-export const getAllProblems = async (req, res) => {
-	
-};
+export const getAllProblems = async (req, res) => {};
 
 export const getProblemById = async (req, res) => {};
 
@@ -114,9 +114,7 @@ export const deleteProblem = async (req, res) => {};
 export const getAllProblemsSolvedByUser = async (req, res) => {
 	// try {
 	// 	const problems = await db.problem.findMany({
-			
 	// 	})
 	// } catch (error) {
-		
 	// }
 };
