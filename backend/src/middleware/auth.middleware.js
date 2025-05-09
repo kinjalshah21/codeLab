@@ -8,6 +8,7 @@ export const authMiddleware = async (req, res, next) => {
 
 		if (!token) {
 			return res.status(401).json({
+				success: false,
 				message: "Unauthorized - No token provided.",
 			});
 		}
@@ -58,7 +59,7 @@ export const checkAdmin = async (req, res, next) => {
 
 		const user = await db.user.findUnique({
 			where: {
-				Id : userId
+				id : userId
 			},
 			select :{
 				role: true

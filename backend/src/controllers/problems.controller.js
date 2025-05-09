@@ -23,7 +23,7 @@ export const createProblem = async (req, res) => {
 	// check user role once again
 	if (req.user.role !== UserRole.ADMIN) {
 		return res.status(403).json({
-			success: true,
+			success: false,
 			message: "You are not allowed to create problem.",
 		});
 	}
@@ -57,6 +57,7 @@ export const createProblem = async (req, res) => {
 
 			for (let i = 0; i < results.length; i++) {
 				const result = results[i];
+				console.log("Result after polling :: ", result);
 
 				if (result.status.id !== 3) {
 					return res.status(400).json({
@@ -67,34 +68,42 @@ export const createProblem = async (req, res) => {
 					});
 				}
 			}
-
-			//save the problem to the database
-
-			const newProblem = await db.problem.create({
-				title,
-				description,
-				difficulty,
-				tags,
-				examples,
-				constraints,
-				testcases,
-				codeSnippets,
-				referenceSolution,
-				userId: req.user.id,
-			});
-
-      return res.status(201).json(newProblem);
 		}
+
+		//after running test classes for every language save the problem to db
+		//save the problem to the database
+
+		const newProblem = await db.problem.create({
+			title,
+			description,
+			difficulty,
+			tags,
+			examples,
+			constraints,
+			testcases,
+			codeSnippets,
+			referenceSolution,
+			userId: req.user.id,
+		});
+
+		return res.status(201).json({
+			success: true,
+			message: "Problem created successfully",
+			problem: newProblem,
+		});
+    
 	} catch (error) {
-      console.error('Error creating the problem.');
-      res.status(500).json({
-        success:false,
-        message: "Error occurred while creating the problem."
-      })
-  }
+		console.error("Error creating the problem.");
+		res.status(500).json({
+			success: false,
+			message: "Error occurred while creating the problem.",
+		});
+	}
 };
 
-export const getAllProblems = async (req, res) => {};
+export const getAllProblems = async (req, res) => {
+	
+};
 
 export const getProblemById = async (req, res) => {};
 
@@ -102,4 +111,12 @@ export const updateProblem = async (req, res) => {};
 
 export const deleteProblem = async (req, res) => {};
 
-export const getAllProblemsSolvedByUser = async (req, res) => {};
+export const getAllProblemsSolvedByUser = async (req, res) => {
+	// try {
+	// 	const problems = await db.problem.findMany({
+			
+	// 	})
+	// } catch (error) {
+		
+	// }
+};
