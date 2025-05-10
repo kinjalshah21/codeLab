@@ -130,7 +130,38 @@ export const getAllProblems = async (req, res) => {
 	}
 };
 
-export const getProblemById = async (req, res) => {};
+export const getProblemById = async (req, res) => {
+	const {id} = req.params;
+
+	try {
+		const problem = await db.problem.findUnique({
+			where: {
+				id
+			}
+		});
+
+		if (!problem) {
+			return res.status(404).json({
+				success: false,
+				message: "No problem found.",
+			});
+		}
+
+		return res.status(200).json({
+			success: true,
+			message: "Problem fetched successfully!",
+			problem,
+		});
+
+	} catch (error) {
+		console.error("Error fetching the problem.");
+		res.status(500).json({
+			success: false,
+			message: "Error occurred while fetching problem.",
+			error: error.message,
+		});
+	}
+};
 
 export const updateProblem = async (req, res) => {};
 
