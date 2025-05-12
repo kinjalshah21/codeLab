@@ -8320,7 +8320,7 @@ export namespace Prisma {
     memory?: string | null
     time?: string | null
     createdAt?: Date | string
-    updatedAt: Date | string
+    updatedAt?: Date | string
     submissions: SubmissionCreateNestedOneWithoutTestcasesInput
   }
 
@@ -8338,7 +8338,7 @@ export namespace Prisma {
     memory?: string | null
     time?: string | null
     createdAt?: Date | string
-    updatedAt: Date | string
+    updatedAt?: Date | string
   }
 
   export type TestCaseResultUpdateInput = {
@@ -8389,7 +8389,7 @@ export namespace Prisma {
     memory?: string | null
     time?: string | null
     createdAt?: Date | string
-    updatedAt: Date | string
+    updatedAt?: Date | string
   }
 
   export type TestCaseResultUpdateManyMutationInput = {
@@ -10029,7 +10029,7 @@ export namespace Prisma {
     memory?: string | null
     time?: string | null
     createdAt?: Date | string
-    updatedAt: Date | string
+    updatedAt?: Date | string
   }
 
   export type TestCaseResultUncheckedCreateWithoutSubmissionsInput = {
@@ -10045,7 +10045,7 @@ export namespace Prisma {
     memory?: string | null
     time?: string | null
     createdAt?: Date | string
-    updatedAt: Date | string
+    updatedAt?: Date | string
   }
 
   export type TestCaseResultCreateOrConnectWithoutSubmissionsInput = {
@@ -10697,7 +10697,7 @@ export namespace Prisma {
     memory?: string | null
     time?: string | null
     createdAt?: Date | string
-    updatedAt: Date | string
+    updatedAt?: Date | string
   }
 
   export type TestCaseResultUpdateWithoutSubmissionsInput = {

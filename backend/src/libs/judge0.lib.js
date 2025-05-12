@@ -59,5 +59,5 @@ export const getLanguageName = async (languageId) => {
 		74: "TypeScript"
 	}
 
-	return LANGUAGE_NAMES[languageId] || Unknown;
+	return LANGUAGE_NAMES[languageId] || 'Unknown';
 }

@@ -68,6 +68,7 @@ export const executeCode = async (req, res) => {
 		});
 
 		console.log("detailedResults ::", detailedResults);
+		const language = await getLanguageName(language_id);
 
 		//store submission
 		const submission = await db.submission.create({
@@ -75,7 +76,7 @@ export const executeCode = async (req, res) => {
 				userId,
 				problemId,
 				sourceCode: source_code,
-				language: getLanguageName(language_id),
+				language,
 				stdin: stdin.join("\n"),
 				stdout: JSON.stringify(
 					detailedResults.map((result) => result.stdout)
@@ -117,6 +118,7 @@ export const executeCode = async (req, res) => {
 
 		//store individual TestCaseResult
 		const testCaseResults = detailedResults.map((result) => ({
+			problemId,
 			submissionId: submission.id,
 			testCase: result.testCase,
 			passed: result.passed,

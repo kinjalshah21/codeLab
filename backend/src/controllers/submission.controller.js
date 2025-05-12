@@ -25,8 +25,8 @@ export const getAllSubmission = async (req, res) => {
 	}
 };
 export const getSubmissionsForProblem = async (req, res) => {
-	const userId = req.user.Id;
-	const problemId = req.params;
+	const userId = req.user.id;
+	const problemId = req.params.problemId;
 
 	try {
 		const submissions = await db.submission.findMany({
@@ -51,7 +51,7 @@ export const getSubmissionsForProblem = async (req, res) => {
 	}
 };
 export const getSubmissionCountForProblem = async (req, res) => {
-	const problemId = req.params;
+	const problemId = req.params.problemId;
 
 	try {
 		const submission = await db.submission.count({
