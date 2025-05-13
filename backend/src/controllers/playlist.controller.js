@@ -43,7 +43,7 @@ export const getPlaylistDetailsById = async (req, res) => {
 	const userId = req.user.id;
 
 	try {
-		const playlist = await db.playlist.finUnique({
+		const playlist = await db.playlist.findUnique({
 			where: {
 				id: playlistId,
 				userId,
