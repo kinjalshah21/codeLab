@@ -56,8 +56,8 @@ export const getLanguageName = async (languageId) => {
 		62: "Java",
 		63: "JavaScript",
 		71: "Python",
-		74: "TypeScript"
-	}
+		74: "TypeScript",
+	};
 
-	return LANGUAGE_NAMES[languageId] || 'Unknown';
-}
+	return LANGUAGE_NAMES[languageId] || "Unknown";
+};
